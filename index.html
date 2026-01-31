@@ -37,7 +37,6 @@
             text-shadow: 0 0 15px var(--matrix-green);
         }
 
-        /* Блок контактов Аслана */
         .contact-box {
             display: inline-block;
             text-align: left;
@@ -75,7 +74,6 @@
             text-shadow: 0 0 5px var(--matrix-green);
         }
 
-        /* Сетка проектов */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -119,27 +117,35 @@
             padding-bottom: 5px;
         }
 
-        .media-placeholder {
+        /* Стиль для видео и заглушек */
+        .video-container {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: #000;
+            margin-top: 15px;
             border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .media-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             border: 1px dashed #333;
-            margin-top: 15px;
             color: #444;
             font-size: 0.7rem;
             text-align: center;
+            box-sizing: border-box;
             padding: 10px;
-            transition: 0.3s;
-        }
-
-        .project-card:hover .media-placeholder {
-            border-color: var(--matrix-green);
-            color: var(--matrix-green);
         }
 
         footer {
@@ -151,7 +157,6 @@
             letter-spacing: 2px;
         }
 
-        /* Кастомный скроллбар */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: var(--matrix-green); }
@@ -175,34 +180,53 @@
     </div>
 </header>
 
-<div class="projects-grid" id="project-container">
-    </div>
+<div class="projects-grid" id="project-container"></div>
 
 <footer>
-    <span style="color: var(--matrix-green)">●</span> SYSTEM ONLINE | ASLAN PORTFOLIO v3.0<br>
+    <span style="color: var(--matrix-green)">●</span> SYSTEM ONLINE | ASLAN PORTFOLIO v3.1<br>
     &copy; 2026 Все права защищены
 </footer>
 
 <script>
     const container = document.getElementById('project-container');
     
-    // Генерируем 24 карточки проектов
+    // Список ID видео для каждого проекта (добавляй новые сюда)
+    const videoData = {
+        1: "msX-SKrDztQ", // Твое первое видео
+    };
+
     for (let i = 1; i <= 24; i++) {
-        const idNum = i < 10 ? '0' + i : i;
+        const videoId = videoData[i];
+        let mediaHtml;
+
+        if (videoId) {
+            // Если есть ID видео, вставляем плеер YouTube
+            mediaHtml = `
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/${videoId}" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>`;
+        } else {
+            // Если видео нет, оставляем стильную заглушку
+            mediaHtml = `
+                <div class="video-container">
+                    <div class="media-placeholder">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px; opacity:0.3"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        <span>МЕСТО ДЛЯ ВИДЕОЗАПИСИ #${i}</span>
+                    </div>
+                </div>`;
+        }
+
         container.innerHTML += `
             <div class="project-card">
-                <div class="project-num">ID: ASLAN_0${idNum}</div>
+                <div class="project-num">ID: ASLAN_0${i < 10 ? '0' + i : i}</div>
                 <div class="project-title">Проект Scratch #${i}</div>
                 <p style="color: var(--text-gray); font-size: 0.85rem;">
-                    Индивидуальная разработка программного кода и анимации в среде Scratch. 
-                    Оптимизация алгоритмов и создание уникальной игровой механики.
+                    Индивидуальная разработка программного кода и анимации в среде Scratch.
                 </p>
-                <div class="media-placeholder">
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px; opacity:0.5">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    <span>МЕСТО ДЛЯ ВИДЕОЗАПИСИ #${i}</span>
-                </div>
+                ${mediaHtml}
             </div>
         `;
     }
