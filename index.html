@@ -117,7 +117,6 @@
             padding-bottom: 5px;
         }
 
-        /* Стиль для видео и заглушек */
         .video-container {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -183,16 +182,17 @@
 <div class="projects-grid" id="project-container"></div>
 
 <footer>
-    <span style="color: var(--matrix-green)">●</span> SYSTEM ONLINE | ASLAN PORTFOLIO v3.1<br>
+    <span style="color: var(--matrix-green)">●</span> SYSTEM ONLINE | ASLAN PORTFOLIO v3.1<br><br>
     &copy; 2026 Все права защищены
 </footer>
 
 <script>
     const container = document.getElementById('project-container');
     
-    // Список ID видео для каждого проекта (добавляй новые сюда)
+    // Список ID видео (обновлен твоими данными)
     const videoData = {
-        1: "msX-SKrDztQ", // Твое первое видео
+        1: "KOfy34FiBLg", // Запись экрана 2026-01-30
+        2: "H4IQkUJuvyA", // Запись экрана 2026-02-07
     };
 
     for (let i = 1; i <= 24; i++) {
@@ -200,7 +200,6 @@
         let mediaHtml;
 
         if (videoId) {
-            // Если есть ID видео, вставляем плеер YouTube
             mediaHtml = `
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/${videoId}" 
@@ -209,7 +208,6 @@
                             allowfullscreen></iframe>
                 </div>`;
         } else {
-            // Если видео нет, оставляем стильную заглушку
             mediaHtml = `
                 <div class="video-container">
                     <div class="media-placeholder">
