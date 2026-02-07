@@ -189,11 +189,11 @@
 <script>
     const container = document.getElementById('project-container');
     
-    // Порядок твоих видео восстановлен
+    // Здесь мы прописываем ID всех твоих видео по порядку
     const videoData = {
-        1: "msX-SKrDztQ", // Твое самое первое видео
-        2: "KOfy34FiBLg", // Новое видео (30.01.2026)
-        3: "H4IQkUJuvyA", // Новое видео (07.02.2026)
+        1: "msX-SKrDztQ", // Твоё 1-е старое видео
+        2: "KOfy34FiBLg", // Твоё 2-е новое видео (от 30.01.2026)
+        3: "H4IQkUJuvyA", // Твоё 3-е новое видео (от 07.02.2026)
     };
 
     for (let i = 1; i <= 24; i++) {
@@ -201,6 +201,7 @@
         let mediaHtml;
 
         if (videoId) {
+            // Если для этого номера есть видео, вставляем плеер
             mediaHtml = `
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/${videoId}" 
@@ -209,6 +210,7 @@
                             allowfullscreen></iframe>
                 </div>`;
         } else {
+            // Если видео пока нет, оставляем пустую карточку
             mediaHtml = `
                 <div class="video-container">
                     <div class="media-placeholder">
